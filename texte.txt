@@ -1,0 +1,187 @@
+          Mon Dossier Symfony(Mes Classes) se trouve dans: 
+
+C:\Users\danma\my_project\src\Entity                    
+
+
+
+
+                            Etapes:
+
+1-Installer Symphony security avec:  composer require symfony/security-bundle
+
+dans le terminal de Vscode.
+
+2-Installer Symphony Maker
+
+
+          pour créer une table via le terminal VSCODE:
+
+
+
+Créer une New BD sur Phpmyadmin(le nom au choix, pour ma part c'est applifrais)
+
+###php bin/console make:user     (pour le User)Toujours commencer
+par ca si ce n'est pas encore fait
+
+
+ensuite créer les tables en utilisant :
+
+
+php bin/console make:entity
+
+
+user(
+
+Nom-> varchar ou String c idem
+Prenom->varchar
+
+
+FraisForfait
+
+libelle->String
+Montant->Float
+
+FicheFrais
+
+NbJustificatifs->integer
+MontantValide->Float
+User->ManytoOne
+
+Etat
+
+Quantite->ManyToOne
+relié a user
+
+
+LigneFraisForfait
+
+Quantite->integer
+User->ManytoOne
+
+LigneFraisHorsForfait
+
+libelle->String
+montant->Float
+Date->date or datetime en cas de'Hésitation click sur "?"
+
+
+###NOTES: 
+
+
+Pour créer une version sur .gitignore :
+
+php bin/console make:migration 
+
+
+pour deplacer sa table crée vers PhpMyadmin:
+
+php bin/console doctrine:migrations:migrate
+
+
+Pour Mettre en relation ou ajouter une clé étrangère dans une table via le vscode, on utilise 
+
+php bin/console make:entity
+
+le nom de la table dans laquelle on veut ajouter
+
+le nom de la table(clé étrangère)
+
+puis attribut ManyToOne
+
+
+        Comment mettre en œuvre un formulaire d’inscription: 
+
+make:registration-form
+
+
+1-Définir une classe pour représenter les utilisateurs;
+
+
+2-Créez un formulaire pour demander les informations d’inscription (vous pouvez les générer avec la commande fournie par le 
+
+MakerBundle              make:registration-form
+
+
+3-Créer un contrôleur pour traiter le formulaire;
+
+
+4-Protégez certaines parties de votre application afin que seuls les utilisateurs enregistrés puissent y accéder.
+
+
+     
+             La cmd ci-dessous permet de résoudre 
+               le problème Verify-mail-bundle:
+
+
+composer require symfonycasts/verify-email-bundle
+
+Après l'avoir fais, on met en oeuvre un Formulaire avec:
+
+
+php bin/console make:registration-form 
+
+Puis j'ai utilisé mon adresse mail: adntrader00@gmail.com
+
+Le nom c'est ADN Mail Bot
+
+Puis j'ai Tapé [0]
+
+Ensuite j'ai installé un simulateur d'adresse mail sur le site:
+
+https://github.com/mailhog/MailHog/releases/v1.0.0    (installer la version amd.exe)
+
+
+Aller dans vscode, sur .env , enlever le # devant MAILER_DSN
+
+puis remplacer //Null par: MAILER_DSN= smtp://localhost:1025
+
+
+
+Activer le Server sur le terminal vsc:
+
+symfony server:start
+
+taper ces liens sur le nav: 
+
+http://127.0.0.1:8000 pour tester ensuite 
+
+http://127.0.0.1:8000/register pour saisir les informations
+
+localhost:8025   pour MailHog(reception des informations)
+
+http://127.0.0.1:8000/login   Pour saisir le mail et le password
+
+
+###On a résolu le problème de symfony server:start en supprimant les espaces blancs sur .env
+
+On a crée un homeController pour confirmation après enregistrement sur le nav en cliquant sur:
+
+php bin/console make:controller
+
+
+Ajouter une authentification avec:
+
+php bin/console make:auth  
+
+[1]          
+
+LoginUser
+
+taper cette cmd pour la validation:
+
+
+composer require validator
+
+Pour créér également des entités sur le form et le controller:
+
+
+php bin/console make:controller (ex: céer Etat dans Controller)
+
+php bin/console make:form (ex:-||- dans form)
+
+
+installer des boostrap de notre choix(voir site de boostrap ou Tuto)
+
+
+
+

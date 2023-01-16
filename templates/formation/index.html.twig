@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formation du bled{% endblock %}
+
+{% block body %}
+    <h1>Formation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Datetime</th>
+                <th>Duree</th>
+                <th>Credit</th>
+                
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formation in formations %}
+            <tr>
+                <td>{{ formation.id }}</td>
+                <td>{{ formation.titre }}</td>
+                <td>{{ formation.datetime ? formation.datetime|date('Y-m-d H:i:s') : '' }}</td>
+                
+                <td>{{ formation.duree ? formation.duree|date('H:i:s') : '' }}</td>
+                <td>{{ formation.credit }}</td>
+                
+                
+                <td>
+                    <a href="{{ path('app_formation_show', {'id': formation.id}) }}">show</a>
+                    <a href="{{ path('app_formation_edit', {'id': formation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_formation_new') }}">Create new</a>
+    
+{% endblock %}

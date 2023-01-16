@@ -1,0 +1,72 @@
+ body
+ {
+     margin:0;
+ }
+
+ section
+ {
+     height: 100vh;/*sa veut dire l'espace visible du navigateur*/
+     background-image: linear-gradient(to top, #3e76c8, #009ae5, #00bae3, #00d5c3, #12eb90);
+     background-size: cover; /*pour que l'image prenne tout l'ecran*/
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+ }
+
+
+
+
+
+
+ 
+ 
+ form
+ {
+     background:rgba(155, 152, 152, 0.214);
+     padding: 60px;
+     box-sizing: border-box;/*cela apllique jusre la largeur et la hauteur sa unie les marge interne et les bordure*/
+     border-radius: 20px; 
+     text-align: center;
+
+ }
+
+
+p
+{ 
+    color: white;
+}
+
+ input
+ {
+     padding: 5px 10px;
+   
+ }
+
+ #email
+ {
+     padding: 5px 4Spx;
+     border-radius: 10px;
+ }
+
+ #mdp
+ {
+     padding: 5px 10px ;
+     border-radius: 10px;
+ }
+
+ #confirme_mdp
+ {
+    padding: 5px 10px ;
+    border-radius: 10px;
+ }
+
+ #valider
+ {
+     padding: 3px 70px;
+     border-radius: 10px;
+     background-color: rgba(113, 78, 237, 0.947);
+     border-color: rgba(113, 78, 237, 0.947);
+     cursor: pointer;
+     color:white;
+ }
