@@ -27,5 +27,13 @@ final class Version20230103140757 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP TABLE log');
+
+        $this->addSql('ALTER TABLE product_category DROP FOREIGN KEY FK_CDFC735612469DE2');
+        $this->addSql('ALTER TABLE product_category DROP FOREIGN KEY FK_CDFC73564584665A');
+        $this->addSql('DROP TABLE category');
+        $this->addSql('DROP TABLE product');
+        $this->addSql('DROP TABLE product_category');
     }
+
+    
 }
