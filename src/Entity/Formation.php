@@ -35,6 +35,15 @@ class Formation
     #[ORM\Column(type: 'string')]
     private $brochureFilename;
 
+    #[ORM\Column(type: 'integer')]
+    private $prix;
+
+    #[ORM\Column(type: 'integer')]
+    private $price;
+
+    #[ORM\ManyToOne(targetEntity: Inscrire::class, inversedBy: 'formations')]
+    private $nombreplace;
+
    
 
 
@@ -118,6 +127,42 @@ class Formation
     public function setBrochureFilename($brochureFilename)
     {
         $this->brochureFilename = $brochureFilename;
+
+        return $this;
+    }
+
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(int $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getNombreplace(): ?Inscrire
+    {
+        return $this->nombreplace;
+    }
+
+    public function setNombreplace(?Inscrire $nombreplace): self
+    {
+        $this->nombreplace = $nombreplace;
 
         return $this;
     }

@@ -11,25 +11,26 @@
                 <th>Id</th>
                 <th>Etat</th>
                 <th>actions</th>
+                <th>prix</th>
+
             </tr>
         </thead>
-        <tbody>
-        {% for inscrire in inscrires %}
-            <tr>
-                <td>{{ inscrire.id }}</td>
-                <td>{{ inscrire.etat }}</td>
-                <td>
-                    <a href="{{ path('app_inscrire_show', {'id': inscrire.id}) }}">show</a>
-                    <a href="{{ path('app_inscrire_edit', {'id': inscrire.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <tbody>
+        {% for formation in dataPanier %}
+        <tr>
+            <td>{{formation.nombreplace}} </td>
+            <td> </td>
+            <td> </td> 
 
-    <a href="{{ path('app_inscrire_new') }}">Create new</a>
+        </tr>
+        {%else%}
+
+        <td colspan="5 class=text-center"> Panier est vide </td> 
+       
+
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
+       
+

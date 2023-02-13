@@ -3,12 +3,12 @@
 {% block title %}Formation du bled{% endblock %}
 
 {% block body %}
-    <h1>Formation index</h1>
+    
 
     <table class="table">
        
         <tbody>
-        {% for formation in formations %}
+        
             <tr>
                 <style>
 
@@ -149,44 +149,55 @@
                 
                 </style>
                 
-                    <h1>Formation index</h1>
+                    
                 
                     <table class="table">
                         <div class="header">
-                            <h1>Reliable, efficient delivery</h1>
-                            <h1>Powered by Technology</h1>
+                            <h1>Voici une liste de formations</h1>
+                            <h1>Disponible à partir de la manana</h1>
                         
-                            <p>Our Artificial Intelligence powered tools use millions of project data points
-                              to ensure that your project is successful</p>
+                            <p>Choisissez une formation et mettez dans le carnet</p>
                           </div>
                         </div>
+                        
+                        {% set array = ["box box-down cyan", "box red","box box-down blue","box orange"] %}
+                        {% set array1 = ["row1-container", "row2-container"] %}
+                        {% set myVal = 0 %}
+                        <div class="{{array1[0]}}">
+                        
+                        {% for formation in formations %}
+
+                        
+    
+                            {% if  myVal <3  %}
+                            <div class="{{array[myVal]}}">
+                              <h2>{{ formation.titre }}</h2>
+                              <p>{{ formation.credit }}</p>
+                              <img src="{{ asset('uploads/brochures/' ~ formation.brochureFilename) }}" alt="">
+
+                              <a href="{{ path('app_inscrire_add', {'id': formation.id}) }}">inscrire</a>
+                                
+                            </div>
+                        
+                            {% if  myVal == 2 %}
+                        </div>
+                            <div class="row2-container">
+                                <div class="{{array[myVal]}}">
+                                  <h2>{{ formation.titre }}</h2>
+                                  <p>{{ formation.credit }}</p>
+                                  <img src="{{ asset('uploads/brochures/' ~ formation.brochureFilename) }}" alt="">
+                                  <a href="{{ path('app_inscrire_add', {'id': formation.id}) }}">inscrire</a>
+                                </div>
+                              </div>
+
+                            {% endif%}
                           
-                          <div class="row1-container">
-                            <div class="box box-down cyan">
-                              <h2>{{ formation.titre }}</h2>
-                              <p>{{ formation.credit }}</p>
-                              <img src="{{ asset('uploads/brochures/' ~ formation.brochureFilename) }}" alt="">
-                            </div>
-                        
-                            <div class="box red">
-                              <h2>{{ formation.titre }}</h2>
-                              <p>{{ formation.credit }}</p>
-                              <img src="{{ asset('uploads/brochures/' ~ formation.brochureFilename) }}" alt="">
-                            </div>
-                        
-                            <div class="box box-down blue">
-                              <h2>{{ formation.titre }}</h2>
-                              <p>{{ formation.credit }}</p>
-                              <img src="{{ asset('uploads/brochures/' ~ formation.brochureFilename) }}" alt="">
-                            </div>
-                          </div>
-                          <div class="row2-container">
-                            <div class="box orange">
-                              <h2>{{ formation.titre }}</h2>
-                              <p>{{ formation.credit }}</p>
-                              <img src="{{ asset('uploads/brochures/' ~ formation.brochureFilename) }}" alt="">
-                            </div>
-                          </div>
+                        {% endif%}
+                        {%  set myVal = myVal + 1 %}
+                        {% else %}
+                          
+
+                          
 
                         
                                     <a href="{{ path('app_formation_show', {'id': formation.id}) }}">show</a>
@@ -197,14 +208,15 @@
                     <a href="{{ path('app_formation_edit', {'id': formation.id}) }}">edit</a>
                 </td>
             </tr>
-        {% else %}
+       
+            {% endfor %}
             <tr>
                 <td colspan="6">no records found</td>
             </tr>
-        {% endfor %}
+        
         </tbody>
     </table>
 
-    <a href="{{ path('app_formation_new') }}">Create new</a>
+    <a href="{{ path('app_inscrire_index') }}">Create new</a>
     
 {% endblock %}

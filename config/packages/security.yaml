@@ -49,6 +49,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/employe, roles: ROLE_USER }
+        
 
 
 when@test:

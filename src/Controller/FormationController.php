@@ -24,7 +24,8 @@ class FormationController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_formation_new', methods: ['GET', 'POST'])]
+    #[Route('/{id}', name: 'app_formation_new', methods: ['GET', 'POST'])]
+    #[IsGranted("ROLE_ADMIN")]
     public function new(Request $request, FormationRepository $formationRepository,  SluggerInterface $slugger): Response
     {
         $this->slugger = $slugger;
@@ -78,6 +79,7 @@ class FormationController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_formation_edit', methods: ['GET', 'POST'])]
+    #[IsGranted("ROLE_ADMIN")]
     public function edit(Request $request, Formation $formation, FormationRepository $formationRepository): Response
     {
         $form = $this->createForm(FormationType::class, $formation);
@@ -95,6 +97,7 @@ class FormationController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_formation_delete', methods: ['POST'])]
+    #[IsGranted("ROLE_ADMIN")]
     public function delete(Request $request, Formation $formation, FormationRepository $formationRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$formation->getId(), $request->request->get('_token'))) {

@@ -18,6 +18,19 @@
             <a href='http://127.0.0.1:8000/register' title ="Connexion"> S'enregistrer</a>
            </button>
         </div>
+        {% if app.user %}
+        
+          <a href="{{ path('app_user_show', {'id': app.user.id}) }}">
+            <img class="profile" src="{{ asset('build/images/profile.png') }}"/>
+
+          </a>
+          
+        
+         
+         
+        {% endif %}
+
+      </div>
       </nav>
         
       </div>
