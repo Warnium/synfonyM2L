@@ -164,7 +164,13 @@
                         {% set array1 = ["row1-container", "row2-container"] %}
                         {% set myVal = 0 %}
                         <div class="{{array1[0]}}">
-                        
+
+                            {% if   Notification is defined %}
+                                <div>  
+                                    <p> {{Notification}} </p>   
+                                 <div/>
+
+                                 {% endif%}
                         {% for formation in formations %}
 
                         
@@ -175,7 +181,7 @@
                               <p>{{ formation.credit }}</p>
                               <img src="{{ asset('uploads/brochures/' ~ formation.brochureFilename) }}" alt="">
 
-                              <a href="{{ path('app_inscrire_add', {'id': formation.id}) }}">inscrire</a>
+                              <a href="{{ path('app_inscrire_new', {'id': formation.id}) }}">inscrire</a>
                                 
                             </div>
                         
@@ -186,7 +192,7 @@
                                   <h2>{{ formation.titre }}</h2>
                                   <p>{{ formation.credit }}</p>
                                   <img src="{{ asset('uploads/brochures/' ~ formation.brochureFilename) }}" alt="">
-                                  <a href="{{ path('app_inscrire_add', {'id': formation.id}) }}">inscrire</a>
+                                  <a href="{{ path('app_inscrire_new', {'id': formation.id}) }}">inscrire</a>
                                 </div>
                               </div>
 

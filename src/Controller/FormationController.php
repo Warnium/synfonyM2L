@@ -24,6 +24,14 @@ class FormationController extends AbstractController
         ]);
     }
 
+    #[Route('/', name: 'app_formation_id', methods: ['GET'])]
+    public function id(FormationRepository $formationRepository): Response
+    {
+        return $this->render('formation/index.html.twig', [
+            'formations' => $formationRepository->findby($user),
+        ]);
+    }
+
     #[Route('/{id}', name: 'app_formation_new', methods: ['GET', 'POST'])]
     #[IsGranted("ROLE_ADMIN")]
     public function new(Request $request, FormationRepository $formationRepository,  SluggerInterface $slugger): Response

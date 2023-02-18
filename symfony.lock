@@ -117,6 +117,12 @@
     "laminas/laminas-code": {
         "version": "4.5.1"
     },
+    "lcobucci/clock": {
+        "version": "2.3.0"
+    },
+    "lcobucci/jwt": {
+        "version": "4.0.4"
+    },
     "mbezhanov/faker-provider-collection": {
         "version": "2.0.1"
     },
@@ -194,6 +200,9 @@
     "psr/cache": {
         "version": "3.0.0"
     },
+    "psr/clock": {
+        "version": "1.0.0"
+    },
     "psr/container": {
         "version": "2.0.2"
     },
@@ -265,6 +274,9 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "stella-maris/clock": {
+        "version": "0.1.7"
     },
     "symfony/asset": {
         "version": "v6.0.7"
@@ -418,6 +430,30 @@
             "branch": "master",
             "version": "1.0",
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
+        }
+    },
+    "symfony/mercure": {
+        "version": "v0.6.2"
+    },
+    "symfony/mercure-bundle": {
+        "version": "0.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "0.3",
+            "ref": "851667ac03fd113c5bd2215fb743974f6709bc62"
+        },
+        "files": [
+            "./config/packages/mercure.yaml"
+        ]
+    },
+    "symfony/mercure-notifier": {
+        "version": "6.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.3",
+            "ref": "ae4620ee823a67e41f65aabec525fa52c79a8b09"
         }
     },
     "symfony/mime": {
@@ -593,6 +629,9 @@
             "./config/packages/twig.yaml",
             "./templates/base.html.twig"
         ]
+    },
+    "symfony/ux-notify": {
+        "version": "v2.7.1"
     },
     "symfony/validator": {
         "version": "6.0",

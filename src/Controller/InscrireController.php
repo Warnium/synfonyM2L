@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Notifier\Notification\Notification;
+use Symfony\Component\Notifier\NotifierInterface;
 
 
 
@@ -21,44 +23,30 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class InscrireController extends AbstractController
 {
     #[Route('/', name: 'app_inscrire_index', methods: ['GET'])]
-    public function index(SessionInterface $session, FormationRepository  $FormationRepository): Response
+    public function index(InscrireRepository $inscrireRepository): Response
     {
-      $panier = $session->get("panier", []);
+        return $this->render('inscrire/index.html.twig', [
 
-      // fabrication de donée
-
-      $dataPanier = [];
-      $total = 0;
-
-      foreach($panier as $id => $quantite  ){
-
-            $formation = $FormationRepository->find($id);
-            $dataPanier = [
-                "formation" => $formation,
-                "quantité" => $quantite
-            ];
-
-            $total += $formation->getPrix() * $quantite;
-      }
-      return $this->render('inscrire/index.html.twig', compact("dataPanier", "total"));
+            'inscrire' => $inscrireRepository->findAll(),
+ 
+        ]);
     }
 
-    #[Route('/new', name: 'app_inscrire_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, InscrireRepository $inscrireRepository): Response
+    #[Route('{id}/new', name: 'app_inscrire_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, InscrireRepository $inscrireRepository, Formation $formation, NotifierInterface $notifier): Response
     {
         $inscrire = new Inscrire();
-        $form = $this->createForm(InscrireType::class, $inscrire);
-        $form->handleRequest($request);
+     
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $inscrireRepository->add($inscrire);
-            return $this->redirectToRoute('app_inscrire_index', [], Response::HTTP_SEE_OTHER);
+        if ($formation!= null) {
+               $inscrire->setUser($this->getUser());
+               $inscrire->setFormation($formation);
+               $inscrire->setEtat("Non valide")  ;           
+                $inscrireRepository->add($inscrire);
+            return $this->redirectToRoute('app_formation_id', ["Notification"=>"Bien inscris"]);
         }
 
-        return $this->renderForm('inscrire/new.html.twig', [
-            'inscrire' => $inscrire,
-            'form' => $form,
-        ]);
+        
     }
 
     #[Route('/{id}', name: 'app_inscrire_show', methods: ['GET'])]
@@ -77,7 +65,7 @@ class InscrireController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $inscrireRepository->add($inscrire);
-            return $this->redirectToRoute('app_inscrire_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_inscrire_index', [] , Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('inscrire/edit.html.twig', [
@@ -97,25 +85,5 @@ class InscrireController extends AbstractController
     }
 
 
-    #[Route('/add/{id}', name: 'app_inscrire_add', methods: ['GET'])]
-    public function add(Formation $formation, SessionInterface $session)
-  {
-   // je récupère le panier
-    $id = $formation->getId();
-   $panier = $session->get("panier", []);
-
-   if(!empty($panier[$id])){
-    $panier[$id]++;
-   }else{
-    $panier[$id] = 1;
-   }
-
-   // sauvegarder session
-   $session->set("panier", $panier);
-
-   return $this->redirectToRoute("app_inscrire_index");
-
-
-  }
 
 }
